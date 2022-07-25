@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  
+body {
+  background-color: rgb(207, 207, 207);
+}
+  
+p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
+.like {
+  cursor: pointer;
+}
+  
+.app-wrapper {
+  border: 1px solid red;
+  height: 100%;
+}
+  
+.app-footer {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid red;
+  width: 100%;
+}
