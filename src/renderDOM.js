@@ -4,8 +4,8 @@
 const resultElement = () => document.querySelector('.shows');
 
 export default async () => {
-    const url ='https://api.tvmaze.com/search/shows?q=sports';
-    await fetch(url)
+  const url = 'https://api.tvmaze.com/search/shows?q=sports';
+  await fetch(url)
     .then((response) => response.json())
     .then((data) => {
       renderNavbar(data);
@@ -15,19 +15,19 @@ export default async () => {
     })
 
     .catch((e) => {
-        document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}No such show available</span>`;
-        renderNavbar([]);
-        renderShow([]);
-      });
-  };
-
-  const renderNavbar = (results) => {
-    const resultList = resultElement();
-    resultList.innerHTML = '';
+      document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show not available</span>`;
+      renderNavbar([]);
+      renderShow([]);
+    });
 };
 
-    // Creating navigation bar
-  const navBar = `
+const renderNavbar = (results) => {
+  const resultList = resultElement();
+  resultList.innerHTML = '';
+};
+
+// Creating navigation bar
+const navBar = `
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">TVShows logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,14 +48,14 @@ export default async () => {
       </ul>
     </div>
 </nav> `;
-  resultList.insertAdjacentHTML('beforebegin', navBar);
-  const renderShow = (results) => {
-    const resultList = resultElement();
-    results.forEach((result) => {
-      const element = document.createElement('div');
-      element.classList.add('card');
-      element.style.width = '20rem';
-      element.innerHTML = `
+resultList.insertAdjacentHTML('beforebegin', navBar);
+const renderShow = (results) => {
+  const resultList = resultElement();
+  results.forEach((result) => {
+    const element = document.createElement('div');
+    element.classList.add('card');
+    element.style.width = '20rem';
+    element.innerHTML = `
         <img src="${result.show.image.original}" class="card-img-top w-100" alt="Image of the show">
         <div class="card-body">
           <div class="d-flex justify-content-between">
@@ -71,6 +71,6 @@ export default async () => {
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal${result.show.id}" >
             Comments
           </button>`;
-      resultList.appendChild(element);
-    });
-  }; 
+    resultList.appendChild(element);
+  });
+};
