@@ -15,7 +15,7 @@ export default async () => {
     })
 
     .catch((e) => {
-      document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show not available</span>`;
+      document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show is not available</span>`;
       renderNavbar([]);
       renderShow([]);
     });
