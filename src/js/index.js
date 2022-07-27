@@ -1,9 +1,9 @@
-import './styles/style.css';
-import './styles/bootstrap.min.css';
-import './styles/bootstrap-grid.min.css';
-import './bootstrap.bundle.min.js';
+import '../styles/style.css';
+import '../styles/bootstrap.min.css';
+import '../styles/bootstrap-grid.min.css';
+import '../bootstrap.bundle.min.js';
 import displayShow from './renderDOM.js';
-import image from './18393.jpg';
+import image from '../18393.jpg';
 
 document.addEventListener('DOMContentLoaded', () => {
   displayShow();

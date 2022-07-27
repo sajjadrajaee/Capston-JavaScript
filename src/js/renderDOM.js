@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 
-import Img from './no_image.jpg';
+import Img from '../no_image.jpg';
 
 const resultElement = () => document.querySelector('.shows');
 
