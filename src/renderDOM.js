@@ -4,10 +4,9 @@
 import Img from './no_image.jpg';
 
 const TVmazeURL = 'https://api.tvmaze.com/search/shows?q=sports';
-const requestedURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/likes/'
+const requestedURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/likes/';
 
 const resultElement = () => document.querySelector('.shows');
-
 
 const renderNavbar = async () => {
   const shows = await generateShows();
@@ -38,7 +37,8 @@ const renderNavbar = async () => {
 </nav> `;
   resultList.insertAdjacentHTML('beforebegin', navBar);
 };
-  const renderShow = async () => {
+const renderShow = async () => {
+  const shows = await generateShows();
   const resultList = resultElement();
   const myLikes = await getLikes();
   shows.forEach((result) => {
@@ -123,24 +123,6 @@ const displayLikes = async () => {
 
 const addEventToCommentBtn = async () => {
   const shows = await generateShows();
-  const showEl = resultElement();
-  showEl.addEventListener('click', (e) => {
-    const targetEl = e.target;
-    const recipientId = targetEl.getAttribute('data-modal-id');
-
-    // FInd the right show and insert modal with data
-    const show = shows.find((item) => item.show.id === Number(recipientId));
-    insertModal(show);
-
-    // Display pop up modal
-    const appModal = document.querySelector('.app-modal');
-    appModal.classList.add('appear');
-    // Add close event to close icon
-    const closeIcon = document.querySelector('.comment-close');
-    closeIcon.addEventListener('click', () => {
-      appModal.remove();
-    });
-  });
 };
 
 export {
