@@ -2,11 +2,16 @@ import '../styles/style.css';
 import '../styles/bootstrap.min.css';
 import '../styles/bootstrap-grid.min.css';
 import '../bootstrap.bundle.min.js';
-import displayShow from './renderDOM.js';
+import {
+  renderNavbar, renderShow, addEventToCommentBtn, displayLikes,
+} from './renderDOM.js';
 import image from '../18393.jpg';
 
-document.addEventListener('DOMContentLoaded', () => {
-  displayShow();
+document.addEventListener('DOMContentLoaded', async () => {
+  await renderNavbar();
+  await renderShow();
+  await addEventToCommentBtn();
+  await displayLikes();
 });
 
 const imageHolder = document.querySelector('.image-section');
