@@ -10,5 +10,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   await renderNavbar();
   await renderShow();
   await addEventToCommentBtn();
-  displayLikes();
+  await displayLikes();
 });

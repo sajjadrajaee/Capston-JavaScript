@@ -71,3 +71,78 @@ const renderNavbar = async () => {
     resultList.appendChild(element);
   });
 };
+
+const sendLikes = async (showID) => {
+  const data = {
+    method: 'POST',
+    body: JSON.stringify({
+      item_id: showID,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  };
+  const response = await fetch(requestedURL, data);
+  return response;
+};
+
+const getLikes = async () => {
+  const request = new Request(requestedURL);
+
+  const response = await fetch(request);
+  const result = await response.json();
+
+  return result;
+};
+
+const generateShows = async () => {
+  const request = new Request(TVmazeURL);
+
+  const response = await fetch(request);
+  const result = await response.json();
+
+  return result;
+};
+
+const displayLikes = async () => {
+  const likeButtons = document.querySelectorAll('.like-button');
+  likeButtons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const currentBtnId = btn.getAttribute('id');
+      await sendLikes(currentBtnId);
+      const btnParent = btn.parentElement;
+      const likeEment = btnParent.nextElementSibling.firstElementChild;
+      const likes = await getLikes();
+      const like = likes
+        .filter((like) => typeof like.item_id === 'string')
+        .filter((like) => like.item_id === currentBtnId)[0];
+      likeEment.textContent = `${like.likes} Likes`;
+    });
+  });
+};
+
+const addEventToCommentBtn = async () => {
+  const shows = await generateShows();
+  const showEl = resultElement();
+  showEl.addEventListener('click', (e) => {
+    const targetEl = e.target;
+    const recipientId = targetEl.getAttribute('data-modal-id');
+
+    // FInd the right show and insert modal with data
+    const show = shows.find((item) => item.show.id === Number(recipientId));
+    insertModal(show);
+
+    // Display pop up modal
+    const appModal = document.querySelector('.app-modal');
+    appModal.classList.add('appear');
+    // Add close event to close icon
+    const closeIcon = document.querySelector('.comment-close');
+    closeIcon.addEventListener('click', () => {
+      appModal.remove();
+    });
+  });
+};
+
+export {
+  renderNavbar, renderShow, displayLikes, addEventToCommentBtn,
+};
