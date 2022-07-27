@@ -9,7 +9,7 @@ export default async () => {
     .then((response) => response.json())
     .then((data) => {
       renderNavbar(data);
-      renderShow(data);
+      // renderShow(data);
       document.querySelector('.errorMessage').innerHTML = '';
       return data;
     })
@@ -17,7 +17,7 @@ export default async () => {
     .catch((e) => {
       document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show is not available</span>`;
       renderNavbar([]);
-      renderShow([]);
+      // renderShow([]);
     });
 };
 
