@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,41 +9,78 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/e5086c44b0.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container-fluid text-center app-wrapper">
         <h1>Search TV MAZE</h1>
-        <div class="row justify-content-start gap-4 shows">
-        
-        </div>
         <span class="text-danger errorMessage"></span>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Comments
-          </button>
-          <div class="myModal"></div>
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <button type="button" class="btn btn-primary" id="popupButton">
+            Comment
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
+            role="dialog">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Video details</h5>
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true" id="popupClose">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="col-md-8 col-offset-2 image-section">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        Film name: Movie name = "Sports Night"
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            premiered: 1998-09-22
+                                        </div>
+                                        <div class="col-md-6">
+                                            ended: 1998-09-22
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            rating: 7.2
+                                        </div>
+                                        <div class="col-md-6">
+                                            country: United States
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10"> <p>Featuring Australia's leading sports personalities, <b>Sports Sunday</b> presents a frank and open debate about all the issues in the week of sport, with the promise of heated opinion and a few laughs along the way.</p> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
+        <div class="modal-backdrop fade show" id="backdrop"></div>
 
 
-        <footer class="position-fixed bottom-0 app-footer" >
+        <div class="row justify-content-start gap-4 shows">
+
+        </div>
+
+
+
+        <footer class="position-fixed bottom-0 app-footer">
             Created by Microverse under CC license
         </footer>
     </div>
 </body>
+
 </html>
