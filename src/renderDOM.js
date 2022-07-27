@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 
+import Img from './no_image.jpg';
+
 const resultElement = () => document.querySelector('.shows');
-import Img from './no_image.jpg'
 
 export default async () => {
   const url = 'https://api.tvmaze.com/search/shows?q=sports';
   await fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       renderNavbar(data);
       renderShow(data);
       document.querySelector('.errorMessage').innerHTML = '';
