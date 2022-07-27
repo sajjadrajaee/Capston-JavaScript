@@ -2,12 +2,14 @@
 /* eslint-disable no-use-before-define */
 
 const resultElement = () => document.querySelector('.shows');
+import Img from './no_image.jpg'
 
 export default async () => {
   const url = 'https://api.tvmaze.com/search/shows?q=sports';
   await fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       renderNavbar(data);
       renderShow(data);
       document.querySelector('.errorMessage').innerHTML = '';
@@ -56,7 +58,11 @@ const renderShow = (results) => {
     element.classList.add('card');
     element.style.width = '20rem';
     element.innerHTML = `
-        <img src="${result.show.image.original}" class="card-img-top w-100" alt="Image of the show">
+    <img
+    src="${result.show.image != null ? result.show.image.original : Img}"
+    class='card-img-top w-100'
+    alt='Image of the show'
+  />;
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <h5 class="card-title">${result.show.name}</h5>
