@@ -1,29 +1,29 @@
-  /* eslint-disable no-unused-vars */
-  /* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
 
-  const resultElement = () => document.querySelector('.shows');
+const resultElement = () => document.querySelector('.shows');
 
-  export default async () => {
-    const url = 'https://api.tvmaze.com/search/shows?q=sports';
-    await fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        renderNavbar(data);
-        renderShow(data);
-        document.querySelector('.errorMessage').innerHTML = '';
-        return data;
-      })
+export default async () => {
+  const url = 'https://api.tvmaze.com/search/shows?q=sports';
+  await fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      renderNavbar(data);
+      renderShow(data);
+      document.querySelector('.errorMessage').innerHTML = '';
+      return data;
+    })
 
-      .catch((e) => {
-        document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show is not available</span>`;
-        renderNavbar([]);
-        renderShow([]);
-      });
-  };
+    .catch((e) => {
+      document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show is not available</span>`;
+      renderNavbar([]);
+      renderShow([]);
+    });
+};
 
-  const renderNavbar = (results) => {
-    const resultList = resultElement();
-    resultList.innerHTML = '';
+const renderNavbar = (results) => {
+  const resultList = resultElement();
+  resultList.innerHTML = '';
 
   // Creating navigation bar
   const navBar = `
