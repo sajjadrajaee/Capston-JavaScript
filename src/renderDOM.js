@@ -3,27 +3,14 @@
 
 import Img from './no_image.jpg';
 
+const TVmazeURL = 'https://api.tvmaze.com/search/shows?q=sports';
+const requestedURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/likes/'
+
 const resultElement = () => document.querySelector('.shows');
 
-export default async () => {
-  const url = 'https://api.tvmaze.com/search/shows?q=sports';
-  await fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      renderNavbar(data);
-      renderShow(data);
-      document.querySelector('.errorMessage').innerHTML = '';
-      return data;
-    })
 
-    .catch((e) => {
-      document.querySelector('.errorMessage').innerHTML = `<span class="text-danger">${e}Show is not available</span>`;
-      renderNavbar([]);
-      renderShow([]);
-    });
-};
-
-const renderNavbar = (results) => {
+const renderNavbar = async () => {
+  const shows = await generateShows();
   const resultList = resultElement();
   resultList.innerHTML = '';
 
@@ -38,7 +25,7 @@ const renderNavbar = (results) => {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Movies(${results.length})<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Movies(${shows.length})<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">TV shows</a>
@@ -51,10 +38,14 @@ const renderNavbar = (results) => {
 </nav> `;
   resultList.insertAdjacentHTML('beforebegin', navBar);
 };
-const renderShow = (results) => {
+  const renderShow = async () => {
   const resultList = resultElement();
-  results.forEach((result) => {
+  const myLikes = await getLikes();
+  shows.forEach((result) => {
     const element = document.createElement('div');
+    const likeObject = myLikes
+      .filter((like) => typeof like.item_id === 'string')
+      .filter((like) => like.item_id === `${result.show.id}`)[0];
     element.classList.add('card');
     element.style.width = '20rem';
     element.innerHTML = `
@@ -66,10 +57,10 @@ const renderShow = (results) => {
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <h5 class="card-title">${result.show.name}</h5>
-            <i class="bi bi-suit-heart like" id="${result.show.id}">id: ${result.show.id}</i>
+            <i class="bi bi-suit-heart like-button" id="${result.show.id}"></i>
           </div>
-          <div class="d-flex justify-content-end">
-            <span class="text-dark d-like">${0} likes</span>
+          <div class="d-flex justify-content-end d-like" id="${result.show.id + 1}">
+          <span>${likeObject ? likeObject.likes : 0} Likes</span>
           </div>
         </div>
         <div class="card-body">
