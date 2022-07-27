@@ -13,7 +13,7 @@ const imageHolder = document.querySelector('.image-section');
 imageHolder.innerHTML += ` <img src="${image}" class="movie-image">;`;
 
 const popup = document.querySelector('#popupButton');
-const popupClose = document.querySelector('#popupClose');
+const popupClose = document.querySelector('.close');
 
 popup.addEventListener('click', (e) => {
   e.preventDefault();
