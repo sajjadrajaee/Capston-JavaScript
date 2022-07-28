@@ -37,7 +37,8 @@ const renderNavbar = async () => {
   resultList.insertAdjacentHTML('beforebegin', navBar);
 };
 const renderShow = async () => {
-  const shows = await generateShows();
+  const myshows = await generateShows();
+  const shows = myshows.filter((s) => s.show.id !== 5451);
   const resultList = resultElement();
   const myLikes = await getLikes();
   shows.forEach((result) => {
@@ -45,8 +46,8 @@ const renderShow = async () => {
     const likeObject = myLikes
       .filter((like) => typeof like.item_id === 'string')
       .filter((like) => like.item_id === `${result.show.id}`)[0];
-    element.classList.add('card');
-    element.style.width = '20rem';
+      element.classList.add('card', 'mx-0', 'border-2', 'shadow', 'pt-2');
+      element.style.width = '26rem';
     element.innerHTML = `
     <img
     src="${result.show.image != null ? result.show.image.original : Img}"
@@ -66,7 +67,10 @@ const renderShow = async () => {
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal${result.show.id}" >
             Comments
-          </button>`;
+          </button>
+        </div>
+        `;
+        
     resultList.appendChild(element);
   });
 };
