@@ -46,8 +46,8 @@ const renderShow = async () => {
     const likeObject = myLikes
       .filter((like) => typeof like.item_id === 'string')
       .filter((like) => like.item_id === `${result.show.id}`)[0];
-      element.classList.add('card', 'mx-0', 'border-2', 'shadow', 'pt-2');
-      element.style.width = '26rem';
+    element.classList.add('card', 'mx-0', 'border-2', 'shadow', 'pt-2');
+    element.style.width = '26rem';
     element.innerHTML = `
     <img
     src="${result.show.image != null ? result.show.image.original : Img}"
@@ -70,7 +70,7 @@ const renderShow = async () => {
           </button>
         </div>
         `;
-        
+
     resultList.appendChild(element);
   });
 };
