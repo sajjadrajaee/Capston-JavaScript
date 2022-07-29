@@ -1,4 +1,4 @@
-import { resultElement, generateShows } from './renderDOM.js';
+import { resultElement, generateShows } from './js/renderDOM.js';
 import getDate from './date.js';
 
 const commentsURL = (id = 0) => {
@@ -41,7 +41,11 @@ const insertModal = ({ show }) => {
     <div class="app-modal" tabindex="-1" aria-hidden="true">
     <div class="app-modal-content shadow p-3 mb-5 bg-body rounded border border-secondary">
         <div class="app-modal-head">
-            <img src="${show.image.original}" class="comment-image" alt="Image of the show">
+        <img
+        src="${result.show.image != null ? result.show.image.original : Img}"
+        class='comment-image'
+        alt='Image of the show'
+      />;
             <div class="show-title">
                 <h5>${show.name}</h5>
                 <p>${show.summary}</p>
