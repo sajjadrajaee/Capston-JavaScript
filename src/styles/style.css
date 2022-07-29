@@ -108,3 +108,17 @@ p {
   transition: transform 0.2s; /* Animation */
   width: 100%;
 }
+
+.card-img-top {
+  transition: transform 0.2s; /* Animation */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card-img-top :hover {
+  transform: scale(1.5);
+}
+
+.shows {
+  margin: 24px;
+}
