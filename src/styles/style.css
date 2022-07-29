@@ -107,11 +107,6 @@ p {
 .card-img-top {
   transition: transform 0.2s; /* Animation */
   width: 100%;
-}
-
-.card-img-top {
-  transition: transform 0.2s; /* Animation */
-  width: 100%;
   margin: 0 auto;
 }
 
