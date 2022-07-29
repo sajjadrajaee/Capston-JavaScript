@@ -118,6 +118,7 @@ const addEventToCommentBtn = async () => {
         return comments;
       }).then((res) => {
         console.log(res);
+        // eslint-disable-next-line no-use-before-define
         updateCommentCount();
       });
     const getCommentCount = () => {
