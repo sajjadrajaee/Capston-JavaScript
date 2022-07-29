@@ -1,6 +1,28 @@
 import { resultElement, generateShows } from './renderDOM.js';
 import Img from '../no_image.jpg';
 
+const commentsURL = (id = 0) => {
+  if (id === 0) {
+    return 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/comments';
+  }
+  return `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/comments?item_id=${id}`;
+};
+
+const commentCard = (commentObj) => {
+  const element = `
+      <li>
+        <span class="comment-date">${commentObj.creation_date} ${commentObj.username}: ${commentObj.comment} </span>
+       
+      </li>`;
+  document.querySelector('.comments-container').insertAdjacentHTML('beforeend', element);
+};
+
+const getComment = async (id) => {
+  const url = commentsURL(id);
+  const response = await fetch(url);
+  return response.json();
+};
+
 const insertModal = ({ show }) => {
   const resultList = resultElement();
   let imageURL = '';
@@ -9,6 +31,15 @@ const insertModal = ({ show }) => {
   } else {
     imageURL = Img;
   }
+  getComment(show.show.id)
+    .then((comments) => {
+      comments.forEach((element) => {
+        commentCard(element);
+      });
+      return comments;
+    }).then((res) => {
+      console.log(res);
+    });
 
   const popup = `
     <div class="app-modal" tabindex="-1" aria-hidden="true">
