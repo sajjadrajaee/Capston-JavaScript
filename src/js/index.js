@@ -1,9 +1,9 @@
 import '../styles/style.css';
 import '../styles/bootstrap.min.css';
 import '../styles/bootstrap-grid.min.css';
-import '../bootstrap.bundle.min.js';
+import addEventToCommentBtn from './comment.js';
 import {
-  renderNavbar, renderShow, addEventToCommentBtn, displayLikes,
+  renderNavbar, renderShow, displayLikes,
 } from './renderDOM.js';
 
 document.addEventListener('DOMContentLoaded', async () => {

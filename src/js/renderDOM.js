@@ -125,5 +125,6 @@ const addEventToCommentBtn = async () => {
 };
 
 export {
-  renderNavbar, renderShow, displayLikes, addEventToCommentBtn, resultElement,
+  renderNavbar, renderShow, displayLikes, addEventToCommentBtn, resultElement, generateShows,
+  getLikes,
 };

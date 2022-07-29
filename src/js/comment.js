@@ -1,115 +1,98 @@
-import { renderShow, resultElement } from './renderDOM.js';
-// imageHolder.innerHTML += ` ;`;
+import { resultElement, generateShows } from './renderDOM.js';
+import Img from '../no_image.jpg';
 
-const popup = document.querySelector('#popupButton');
-const popupClose = document.querySelector('.close');
+const insertModal = ({ show }) => {
+  const resultList = resultElement();
+  let imageURL = '';
+  if (show.image != null) {
+    imageURL = show.image.original;
+  } else {
+    imageURL = Img;
+  }
 
-popup.addEventListener('click', (e) => {
-  e.preventDefault();
-  document.getElementById('backdrop').style.display = 'block';
-  document.getElementById('exampleModal').style.display = 'block';
-  document.getElementById('exampleModal').classList.add('show');
-});
-
-popupClose.addEventListener('click', (e) => {
-  e.preventDefault();
-  document.getElementById('backdrop').style.display = 'none';
-  document.getElementById('exampleModal').style.display = 'none';
-  document.getElementById('exampleModal').classList.remove('show');
-});
-
-const attachModal = ({ item }) => {
-  const render = renderShow();
-  const popup = `<div class="modal app-modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
-  role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Video details</h5>
-              <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true" id="popupClose">×</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-md-8 col-offset-2 image-section">
-                        <img src="${item.image.orginal}" class="movie-image">
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12">
-                          Film name: "Sports Night"
-                      </div>
-                  </div>
-                  <div class="row">
-                          <div class="col-md-6">
-                              premiered: 1998-09-22
-                          </div>
-                          <div class="col-md-6">
-                              ended: 1998-09-22
-                          </div>
-                  </div>
-                  <div class="row">
-                          <div class="col-md-6">
-                              rating: 7.2
-                          </div>
-                          <div class="col-md-6">
-                              country: United States
-                          </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-10">
-                          <p>Featuring Australia's leading sports personalities, <b>Sports Sunday</b>
-                              presents a frank and open debate about all the issues in the week of sport,
-                              with the promise of heated opinion and a few laughs along the way.</p>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <ul class="comments"></ul>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12">
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1">Name</span>
-                              </div>
-                              <input type="text" class="form-control" placeholder="Username"
-                                  aria-label="Username" aria-describedby="basic-addon1">
-                          </div>
-                          <div class="input-group">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text">Comment</span>
-                              </div>
-                              <textarea class="form-control" aria-label="With textarea"></textarea>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary close">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-      </div>
-  </div>
+  const popup = `
+    <div class="app-modal" tabindex="-1" aria-hidden="true">
+    <div class="app-modal-content shadow p-3 mb-5 bg-body rounded border border-secondary">
+        <div class="app-modal-head">
+            <img src="${imageURL}" class="comment-image" alt="Image of the show">
+            <div class="show-title">
+                <h5>${show.name}</h5>
+                <p>${show.summary}</p>
+            </div>
+            <button type="button" class="btn-close comment-close" data-comment-close='close'></button>
+        </div>
+        <ul class="show-description">
+            <li >Language: ${show.language}</li>
+            <li >Run time: ${show.runtime}</li>
+            <li >Premiered: ${show.premiered}</li>
+            <li ><a href="${show.url}" class="card-link">Watch Here</a></li>
+        </ul>
+        <div>
+          <h5>
+            Comments <span class='comment-count'>(0)</span>
+          </h5>
+          <ul class="comments-container">
+  
+          </ul>
+        </div>
+        <div class="comment-form-wrapper">
+            <form class="comment-form">
+                <h5>Add a comment</h5>
+            <div>
+                <label for="name" class="form-label text-dark"></label>
+                <input type="text" class="form-control name" id="name" required maxlength="32" placeholder="Your name">
+            </div>
+            <div>
+                <label for="comment" class="form-label text-dark"></label>
+                <textarea class="form-control insight-text" aria-label="With textarea" id="comment" required maxlength="32" placeholder="Your insights"></textarea>
+            </div>                      
+                <button type="submit" class="btn btn-primary bg-dark shadow">Comment</button>                    
+            </form>
+        </div> 
+    </div> 
   </div>`;
-  render.insertAdjacentHTML('beforebegin', popup);
+
+  resultList.insertAdjacentHTML('beforebegin', popup);
 };
 
-const CommentHandler = async () => {
-  const elements = renderShow();
-  const elementShow = resultElement();
-  elementShow.addEventListener('click', (e) => {
-    const target = e.target;
-    const targetId = target.getAttribute('data-id');
+const addEventToCommentBtn = async () => {
+  const shows = await generateShows();
+  const showEl = resultElement();
+  showEl.addEventListener('click', (e) => {
+    const targetEl = e.target;
+    const recipientId = targetEl.getAttribute('data-id');
 
-    const show = elements.find((item) => item.show.id === Number(targetId));
-    attachModal(show);
+    // FInd the right show and insert modal with data
+    const show = shows.find((item) => item.show.id === Number(recipientId));
+    insertModal(show);
+
+    const formContainer = document.querySelector('.comment-form');
+    formContainer.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.querySelector('#name').value;
+      const comment = document.querySelector('#comment').value;
+      const data = {};
+
+      if (name === '' && comment === '') {
+        return '';
+      }
+      data.item_id = show.show.id;
+      data.username = name;
+      data.comment = comment;
+      document.querySelector('#name').value = '';
+      document.querySelector('#comment').value = '';
+      return '';
+    });
+    // Display pop up modal
+    const appModal = document.querySelector('.app-modal');
+    appModal.classList.add('appear');
+
+    // Add close event to close icon
+    const closeIcon = document.querySelector('.comment-close');
+    closeIcon.addEventListener('click', () => {
+      appModal.remove();
+    });
   });
-
-  const modalPlace = document.querySelector('.app-modal');
-  modalPlace.classList.add('appear');
 };
 
-export default CommentHandler;
+export default addEventToCommentBtn;
