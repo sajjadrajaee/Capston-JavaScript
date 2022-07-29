@@ -2,6 +2,8 @@
 
 This project is a movie app based on an external API.
 
+## Live demo 
+
 ## Built With
 
 - HTML
