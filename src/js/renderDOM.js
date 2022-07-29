@@ -64,7 +64,7 @@ const renderShow = async () => {
         </div>
         <div class="card-body">
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal${result.show.id}" >
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${result.show.id}" >
             Comments
           </button>`;
     resultList.appendChild(element);
@@ -125,5 +125,5 @@ const addEventToCommentBtn = async () => {
 };
 
 export {
-  renderNavbar, renderShow, displayLikes, addEventToCommentBtn,
+  renderNavbar, renderShow, displayLikes, addEventToCommentBtn, resultElement,
 };
