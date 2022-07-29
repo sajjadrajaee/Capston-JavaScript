@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   await displayLikes();
 });
 
+// const popupClass = document.querySelector('.popup');
+
+// const popupHTML = `
+
+// `;
+// popupClass.innerHTML = popupHTML;
+
 const imageHolder = document.querySelector('.image-section');
 imageHolder.innerHTML += ` <img src="${image}" class="movie-image">;`;
 
