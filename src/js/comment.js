@@ -1,5 +1,6 @@
 import { resultElement, generateShows } from './renderDOM.js';
 import Img from '../no_image.jpg';
+import getDate from './date.js';
 
 const commentsURL = (id = 0) => {
   if (id === 0) {
@@ -23,6 +24,18 @@ const getComment = async (id) => {
   return response.json();
 };
 
+const postComment = async (data) => {
+  const url = commentsURL();
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  return response;
+};
+
 const insertModal = ({ show }) => {
   const resultList = resultElement();
   let imageURL = '';
@@ -31,7 +44,7 @@ const insertModal = ({ show }) => {
   } else {
     imageURL = Img;
   }
-  getComment(show.show.id)
+  getComment(show.id)
     .then((comments) => {
       comments.forEach((element) => {
         commentCard(element);
@@ -97,6 +110,16 @@ const addEventToCommentBtn = async () => {
     const show = shows.find((item) => item.show.id === Number(recipientId));
     insertModal(show);
 
+    getComment(show.show.id)
+      .then((comments) => {
+        comments.forEach((element) => {
+          commentCard(element);
+        });
+        return comments;
+      }).then((res) => {
+        console.log(res);
+      });
+
     const formContainer = document.querySelector('.comment-form');
     formContainer.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -112,8 +135,15 @@ const addEventToCommentBtn = async () => {
       data.comment = comment;
       document.querySelector('#name').value = '';
       document.querySelector('#comment').value = '';
+      postComment(data).then((response) => {
+        if (response.status === 201) {
+          data.creation_date = getDate();
+          commentCard(data);
+        }
+      });
       return '';
     });
+
     // Display pop up modal
     const appModal = document.querySelector('.app-modal');
     appModal.classList.add('appear');
