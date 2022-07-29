@@ -118,8 +118,17 @@ const addEventToCommentBtn = async () => {
         return comments;
       }).then((res) => {
         console.log(res);
+        updateCommentCount();
       });
-
+    const getCommentCount = () => {
+      const container = document.querySelector('.comments-container');
+      const count = container.children.length;
+      return count;
+    };
+    const updateCommentCount = () => {
+      const commentCountEl = document.querySelector('.comment-count');
+      commentCountEl.textContent = `(${getCommentCount()})`;
+    };
     const formContainer = document.querySelector('.comment-form');
     formContainer.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -139,6 +148,7 @@ const addEventToCommentBtn = async () => {
         if (response.status === 201) {
           data.creation_date = getDate();
           commentCard(data);
+          updateCommentCount();
         }
       });
       return '';
