@@ -1,11 +1,17 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-use-before-define */
-
 import Img from '../no_image.jpg';
 
 const TVmazeURL = 'https://api.tvmaze.com/search/shows?q=money';
 const requestedURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/likes/';
 const resultElement = () => document.querySelector('.shows');
+
+const generateShows = async () => {
+  const request = new Request(TVmazeURL);
+
+  const response = await fetch(request);
+  const result = await response.json();
+
+  return result;
+};
 
 const renderNavbar = async () => {
   const shows = await generateShows();
@@ -35,6 +41,14 @@ const renderNavbar = async () => {
     </div>
 </nav> `;
   resultList.insertAdjacentHTML('beforebegin', navBar);
+};
+const getLikes = async () => {
+  const request = new Request(requestedURL);
+
+  const response = await fetch(request);
+  const result = await response.json();
+
+  return result;
 };
 const renderShow = async () => {
   const myshows = await generateShows();
@@ -89,24 +103,6 @@ const sendLikes = async (showID) => {
   return response;
 };
 
-const getLikes = async () => {
-  const request = new Request(requestedURL);
-
-  const response = await fetch(request);
-  const result = await response.json();
-
-  return result;
-};
-
-const generateShows = async () => {
-  const request = new Request(TVmazeURL);
-
-  const response = await fetch(request);
-  const result = await response.json();
-
-  return result;
-};
-
 const displayLikes = async () => {
   const likeButtons = document.querySelectorAll('.like-button');
   likeButtons.forEach((btn) => {
@@ -125,7 +121,6 @@ const displayLikes = async () => {
 };
 
 const addEventToCommentBtn = async () => {
-  const shows = await generateShows();
 };
 
 export {
