@@ -2,6 +2,8 @@
 
 This project is a movie app based on an external API.
 
+## [Watch a video description of the features](https://drive.google.com/file/d/1CmnqwuMm-DoUiHMdqJrOY0-UFEKk2DwD/view?usp=sharing)
+
 ## Built With
 
 - HTML
@@ -34,11 +36,11 @@ Install the packages globally and after that:
 
 ## Contributors
 
-## Author
-- GitHub: [@githubhandle](https://github.com/Abdullah2213565)
+## Authors
+- GitHub: [@Abdullah](https://github.com/Abdullah2213565)
 - Twitter: [@twitterhandle](https://twitter.com/dulakhan024)
 
-- GitHub: [@githubhandle](https://github.com/sajjadrajaee)
+- GitHub: [@Sajjad](https://github.com/sajjadrajaee)
 - Twitter: [@twitterhandle](https://twitter.com/sajjadrajaee)
 
 ## 🤝 Contributing
