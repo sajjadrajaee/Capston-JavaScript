@@ -44,15 +44,6 @@ const insertModal = ({ show }) => {
   } else {
     imageURL = Img;
   }
-  getComment(show.id)
-    .then((comments) => {
-      comments.forEach((element) => {
-        commentCard(element);
-      });
-      return comments;
-    }).then((res) => {
-      console.log(res);
-    });
 
   const popup = `
     <div class="app-modal" tabindex="-1" aria-hidden="true">
