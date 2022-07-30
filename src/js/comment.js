@@ -44,15 +44,6 @@ const insertModal = ({ show }) => {
   } else {
     imageURL = Img;
   }
-  getComment(show.id)
-    .then((comments) => {
-      comments.forEach((element) => {
-        commentCard(element);
-      });
-      return comments;
-    }).then((res) => {
-      console.log(res);
-    });
 
   const popup = `
     <div class="app-modal" tabindex="-1" aria-hidden="true">
@@ -110,17 +101,6 @@ const addEventToCommentBtn = async () => {
     const show = shows.find((item) => item.show.id === Number(recipientId));
     insertModal(show);
 
-    getComment(show.show.id)
-      .then((comments) => {
-        comments.forEach((element) => {
-          commentCard(element);
-        });
-        return comments;
-      }).then((res) => {
-        console.log(res);
-        // eslint-disable-next-line no-use-before-define
-        updateCommentCount();
-      });
     const getCommentCount = () => {
       const container = document.querySelector('.comments-container');
       const count = container.children.length;
@@ -130,6 +110,15 @@ const addEventToCommentBtn = async () => {
       const commentCountEl = document.querySelector('.comment-count');
       commentCountEl.textContent = `(${getCommentCount()})`;
     };
+    getComment(show.show.id)
+      .then((comments) => {
+        comments.forEach((element) => {
+          commentCard(element);
+        });
+        return comments;
+      }).then(() => {
+        updateCommentCount();
+      });
     const formContainer = document.querySelector('.comment-form');
     formContainer.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -143,8 +132,7 @@ const addEventToCommentBtn = async () => {
       data.item_id = show.show.id;
       data.username = name;
       data.comment = comment;
-      document.querySelector('#name').value = '';
-      document.querySelector('#comment').value = '';
+
       postComment(data).then((response) => {
         if (response.status === 201) {
           data.creation_date = getDate();
@@ -152,6 +140,8 @@ const addEventToCommentBtn = async () => {
           updateCommentCount();
         }
       });
+      document.querySelector('#name').value = '';
+      document.querySelector('#comment').value = '';
       return '';
     });
 

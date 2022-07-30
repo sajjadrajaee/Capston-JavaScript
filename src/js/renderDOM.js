@@ -3,7 +3,7 @@
 
 import Img from '../no_image.jpg';
 
-const TVmazeURL = 'https://api.tvmaze.com/search/shows?q=sports';
+const TVmazeURL = 'https://api.tvmaze.com/search/shows?q=money';
 const requestedURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/Gk2LHbamyoGODOj6Ra8F/likes/';
 const resultElement = () => document.querySelector('.shows');
 
