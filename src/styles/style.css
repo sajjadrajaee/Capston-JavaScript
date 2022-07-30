@@ -117,3 +117,33 @@ p {
 .shows {
   margin: 24px;
 }
+
+@media screen and (max-width: 395px) {
+  .app-modal-content {
+    width: 70%;
+  }
+
+  .comment-image {
+    width: 80%;
+  }
+
+  .comment-close {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 695px) {
+  .app-modal-content {
+    width: 70%;
+  }
+
+  .comment-image {
+    width: 80%;
+  }
+
+  .comment-close {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
